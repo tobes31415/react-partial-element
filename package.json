@@ -9,7 +9,9 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
+    "build": "run-s clean rollup",
+    "rollup": "rollup -c",
+    "clean": "del-cli ./dist",
     "format-all": "prettier --write src",
     "lint-all": "eslint --fix src/**/*.{ts,tsx}"
   },
@@ -37,10 +39,12 @@
     "@types/react": "^18.0.28",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
+    "del-cli": "^5.0.0",
     "eslint": "^8.35.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
+    "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
     "rollup": "^3.17.3",
     "rollup-plugin-dts": "^5.2.0",
