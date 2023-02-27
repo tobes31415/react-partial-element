@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React from "react";
 
 import { DISABLEABLE_ELEMENTS, strategyMap } from "./constants";
-import { PartialElementProps, PropKey, HasChildren } from "./types";
 import {
   isArray,
   isContextProvider,
@@ -15,6 +14,7 @@ import {
   isPrimitiveDataType,
   isReactFalsy,
 } from "./duck-types";
+import { HasChildren, PartialElementProps, PropKey } from "./types";
 
 export function mergePartialElementProps(
   parentState: PartialElementProps,

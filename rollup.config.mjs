@@ -5,7 +5,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 
-export default [
+const config = [
   {
     input: "src/index.ts",
     output: [
@@ -25,7 +25,7 @@ export default [
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
     ],
-   external: ["react"]
+    external: ["react"],
   },
   {
     input: "dist/esm/types/index.d.ts",
@@ -33,3 +33,5 @@ export default [
     plugins: [dts()],
   },
 ];
+
+export default config;
