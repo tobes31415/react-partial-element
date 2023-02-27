@@ -1,0 +1,44 @@
+{
+  "name": "react-partial-element",
+  "version": "0.0.1",
+  "description": "Gives your react projects the ability to create composable partial elements that let you specify properties such as class name that merged into a single dom node at run time.",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobes31415/react-partial-element.git"
+  },
+  "keywords": [
+    "react",
+    "partial",
+    "element",
+    "partial-element"
+  ],
+  "author": "Jake Tober",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tobes31415/react-partial-element/issues"
+  },
+  "homepage": "https://github.com/tobes31415/react-partial-element#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/react": "^18.0.28",
+    "react": "^18.2.0",
+    "rollup": "^3.17.3",
+    "rollup-plugin-dts": "^5.2.0",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}
