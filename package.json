@@ -10,7 +10,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "format-all": "prettier --write .",
+    "format-all": "prettier --write src",
     "lint-all": "eslint --fix src/**/*.{ts,tsx}"
   },
   "repository": {
