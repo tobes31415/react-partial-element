@@ -18,7 +18,7 @@ Check out this dom tree, We can create this using logical HOC, and still benefit
         <div>Top Row</div>
         <div>Bottom Row</div>
     </aside>
-    <main class="main-layout"><MainContent>
+    <main class="main-layout">
         Body Content Here
     </main>
 </div>
