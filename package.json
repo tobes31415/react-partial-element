@@ -9,7 +9,9 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "format-all": "prettier --write .",
+    "lint-all": "eslint --fix src/**/*.{ts,tsx}"
   },
   "repository": {
     "type": "git",
@@ -31,7 +33,14 @@
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.28",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
     "react": "^18.2.0",
     "rollup": "^3.17.3",
     "rollup-plugin-dts": "^5.2.0",
@@ -40,5 +49,8 @@
   },
   "peerDependencies": {
     "react": "^18.2.0"
+  },
+  "dependencies": {
+    "prettier": "^2.8.4"
   }
 }

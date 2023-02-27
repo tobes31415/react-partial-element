@@ -1,0 +1,6 @@
+{
+  "importOrder": ["^[a-z]|^@[a-z]", "^@[A-Z]", "^."],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "endOfLine": "lf"
+}
