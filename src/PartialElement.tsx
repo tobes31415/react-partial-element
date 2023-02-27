@@ -26,7 +26,9 @@ function rewriteJSXTree(
   } else if (isPrimitiveDataType(temp) || isArray(temp) || isDomElement(temp)) {
     return createFinalElement({ ...state, children: temp });
   } else if (isPartialElementPortal(temp)) {
-    return createFinalElement({ ...state, children: temp.props.children });
+    const { children: innerChildren, ...newProps } = temp.props;
+    const mergedState = mergePartialElementProps(state, newProps);
+    return createFinalElement({ ...mergedState, children: innerChildren });
   } else if (isPartialElement(temp)) {
     const { children: innerChildren, ...newProps } = temp.props;
     const mergedState = mergePartialElementProps(state, newProps);
