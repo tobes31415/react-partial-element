@@ -1,11 +1,3 @@
-# THIS IS A WORK IN PROGRESS
-* version 1.0.0 works fine in the browser but throws errors when using tools like cypress
-* version 1.0.1 works in cypress by temporarily disabling the ability to unwrap function components which defeats the purpose of using this library
-
-If you need the app to work with cypress then please give a bit more time before you use this app on your production code.
-
-I will experiment with ways to fix the library when used in Cypress but it will probably take several days.
-
 # react-partial-element
 
 Gives your react projects the ability to create composable partial elements that let you specify properties such as class name that merged into a single dom node at run time. Combine this with Atomic Design principles to create an easy to maintain design system for your application.

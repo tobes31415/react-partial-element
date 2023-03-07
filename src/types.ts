@@ -3,6 +3,7 @@ export interface PartialElementProps extends React.HTMLAttributes<HTMLElement> {
   data?: Record<string, string>;
   disabled?: boolean;
   allowEventHandlersWhileDisabled?: boolean;
+  unwrapFragments?: boolean;
 }
 export type PropKey = keyof PartialElementProps;
 

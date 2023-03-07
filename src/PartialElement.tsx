@@ -23,7 +23,12 @@ function rewriteJSXTree(
   (globalThis as any).temp = temp;
   if (isReactFalsy(temp)) {
     return <></>;
-  } else if (isPrimitiveDataType(temp) || isArray(temp) || isDomElement(temp)) {
+  } else if (
+    isPrimitiveDataType(temp) ||
+    isArray(temp) ||
+    isDomElement(temp) ||
+    (isFragment(temp) && !state.unwrapFragments)
+  ) {
     return createFinalElement({ ...state, children: temp });
   } else if (isPartialElementPortal(temp)) {
     const { children: innerChildren, ...newProps } = temp.props;
