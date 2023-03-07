@@ -4,7 +4,7 @@ Gives your react projects the ability to create composable partial elements that
 
 # Usage
 
-PartialElement - All adjacent partial element nodes will be collapsed into a single resulting dom node. Each Partial Element collapses into a singular element when it encounters a PartialElementPortal, or if it encounters any dom nodes, rendering primitives, or any array of children. Partial Elements are still considered Adjacent if they are returned from your custom components as long as no other dom nodes get emitted between them.
+PartialElement - All adjacent partial element nodes will be collapsed into a single resulting dom node. Each Partial Element collapses into a singular element when it encounters a PartialElementPortal, or if it encounters any dom nodes, rendering primitives, Fragments, or any array of children. Partial Elements are still considered Adjacent if they are returned from your custom components as long as no other dom nodes get emitted between them.
 
 PartialElementPortal - Guarentees that regardless of what happened above this point in the JSX tree that a single dom node will be emitted at exactly this location. Useful for when you're working with slotted templates and want more control over the rendered output
 
