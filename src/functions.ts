@@ -31,6 +31,7 @@ export function createFinalElement(
     disabled,
     allowEventHandlersWhileDisabled,
     data,
+    onRef,
     ...restOfProps
   } = incomingProps;
   const tag = element || "div";
@@ -55,6 +56,9 @@ export function createFinalElement(
     Object.entries(data).forEach(([key, value]) => {
       props[`data-${key}`] = value;
     });
+  }
+  if (onRef) {
+    props.ref = onRef;
   }
 
   return React.createElement(tag, props, children);

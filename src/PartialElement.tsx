@@ -111,7 +111,7 @@ function createFunctionChain(
 ): DomEventHandler {
   return (e: any, ...args: any[]) => {
     currentFn(e, ...args);
-    if (!e.cancelBubble) {
+    if (!e || !e.cancelBubble) {
       previousFn(e, ...args);
     }
   };
