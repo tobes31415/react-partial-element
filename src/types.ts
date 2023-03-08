@@ -15,4 +15,5 @@ export type MergeStrategies =
   | "replace"
   | "concatenateString"
   | "mergeObject"
-  | "appendArray";
+  | "appendArray"
+  | "functionChain";

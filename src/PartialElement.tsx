@@ -74,13 +74,18 @@ function mergePartialElementProps(
     if (!newValue) {
       return parentValue;
     }
-    switch (strategyMap[key]) {
+    const strategy =
+      strategyMap[key] ?? (key.startsWith("on") ? "functionChain" : "replace");
+    switch (strategy) {
       case "appendArray":
         return [...parentValue, ...newValue];
       case "concatenateString":
         return uniqueClasses(parentValue + " " + newValue);
       case "mergeObject":
         return Object.assign({}, parentValue, newValue);
+      case "functionChain":
+        return createFunctionChain(parentValue, newValue);
+      case "replace":
       default:
         return newValue;
     }
@@ -91,6 +96,22 @@ function mergePartialElementProps(
     childState[key] = applyMerge(key);
   });
   return childState;
+}
+
+type DomEventHandler<E extends Event = Event, T = any> = (
+  e: E,
+  ...args: T[]
+) => void;
+function createFunctionChain(
+  previousFn: DomEventHandler,
+  currentFn: DomEventHandler
+): DomEventHandler {
+  return (e: any, ...args: any[]) => {
+    currentFn(e, ...args);
+    if (!e.cancelBubble) {
+      previousFn(e, ...args);
+    }
+  };
 }
 
 function isReactFalsy(value: any) {
