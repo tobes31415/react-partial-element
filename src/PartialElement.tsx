@@ -11,7 +11,12 @@ import { PartialElementProps, PropKey } from "./types";
  */
 export const PartialElement = (props: PartialElementProps) => {
   const { children, ...newProps } = props;
-
+  if (newProps.onRef) {
+    const ref = newProps.onRef;
+    if (typeof ref === "object") {
+      newProps.onRef = (e) => (ref.current = e);
+    }
+  }
   return rewriteJSXTree(children, newProps);
 };
 
