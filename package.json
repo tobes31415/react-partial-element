@@ -1,6 +1,6 @@
 {
   "name": "react-partial-element",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Gives your react projects the ability to create composable partial elements that let you specify properties such as class name that merged into a single dom node at run time.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
