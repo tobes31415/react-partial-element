@@ -2,7 +2,7 @@
 import React from "react";
 
 import { PartialElementPortal } from "./PartialElementPortal";
-import { strategyMap } from "./constants";
+import { PartialElementMergeStrategies } from "./constants";
 import { createFinalElement, uniqueClasses } from "./functions";
 import { PartialElementProps, PropKey } from "./types";
 
@@ -75,11 +75,14 @@ function mergePartialElementProps(
       return parentValue;
     }
     const strategy =
-      strategyMap[key] ?? (key.startsWith("on") ? "functionChain" : "replace");
+      PartialElementMergeStrategies[key] ??
+      (key.startsWith("on") ? "functionChain" : "replace");
     switch (strategy) {
       case "appendArray":
         return [...parentValue, ...newValue];
       case "concatenateString":
+        return parentValue + " " + newValue;
+      case "concatenateCssClass":
         return uniqueClasses(parentValue + " " + newValue);
       case "mergeObject":
         return Object.assign({}, parentValue, newValue);

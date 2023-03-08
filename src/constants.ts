@@ -1,7 +1,7 @@
 import { MergeStrategies } from "./types";
 
-export const strategyMap: Record<string, MergeStrategies> = {
-  className: "concatenateString",
+export const PartialElementMergeStrategies: Record<string, MergeStrategies> = {
+  className: "concatenateCssClass",
   data: "mergeObject",
   debugName: "concatenateString",
 };

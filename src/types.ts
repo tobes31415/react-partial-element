@@ -13,6 +13,7 @@ export interface HasChildren {
 
 export type MergeStrategies =
   | "replace"
+  | "concatenateCssClass"
   | "concatenateString"
   | "mergeObject"
   | "appendArray"
