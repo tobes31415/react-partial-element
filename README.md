@@ -48,8 +48,6 @@ Here is a list of which specific strategies are used for which properties
 | on\*\*\*  | functionChain       |
 | default   | replace             |
 
-Note that if you provide both a data-foo property and also a data object which contains the foo key, then the value stored in data object will replace the data-foo as data object is applied to the dom properties at the end.
-
 You can override these behaviours by importing the PartialElementMergeStrategies object, and overriding the key corresponding to the property you wish to change and setting it to the name of a merge strategy as listed in the previous section. This will be a global change for your project as allowing the merge strategy to differ from element to element would create confusing scenarios likely resulting in bugs so make sure that you think about the impacts before overriding the defaults.
 
 # How do I get the element reference?
