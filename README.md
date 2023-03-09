@@ -45,18 +45,42 @@ Here is a list of which specific strategies are used for which properties
 | Property  | Strategy Used       |
 | --------- | ------------------- |
 | className | concatenateCssClass |
-| data      | mergeObject         |
-| debugName | concatenateString   |
 | on\*\*\*  | functionChain       |
 | default   | replace             |
 
+Note that if you provide both a data-foo property and also a data object which contains the foo key, then the value stored in data object will replace the data-foo as data object is applied to the dom properties at the end.
+
 You can override these behaviours by importing the PartialElementMergeStrategies object, and overriding the key corresponding to the property you wish to change and setting it to the name of a merge strategy as listed in the previous section. This will be a global change for your project as allowing the merge strategy to differ from element to element would create confusing scenarios likely resulting in bugs so make sure that you think about the impacts before overriding the defaults.
+
+# How do I get the element reference?
+
+You can get the element reference by passing in a callback handler for onRef which will be invoked when the dom node is created. Alternatively you can pass in a React.MutableRefObject<HtmlElement> which will get updated automatically.
+
+```
+<PartialElement onRef={r => console.log("The new reference is ", r)}>...
+```
+
+```
+const myElement = useRef<HtmlElement>();
+<PartialElement onRef={myElement}>...
+```
+
+# Special props
+
+| Property Name                   | effect                                                                                                                                                                                                                                                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| element                         | The name of the dom node that will get created. (default: "`div`")                                                                                                                                                                                                                                                  |
+| disabled                        | The element will get the `disabled` attribute if it is an input or a button, otherwise it will get the `data-disabled` attribute. Additionally any `on***` attributes, with the exception of onRef, will be omitted unless you also specifiy allowEventHandlersWhileDisabled                                        |
+| allowEventHandlersWhileDisabled | The partial element will emit the on\* event handlers even when disabled (default false)                                                                                                                                                                                                                            |
+| unwrapFragments                 | Continues to unwrap the JSX tree even when it encounters a fragment. Note that this can cause issues with other libraries such as emotion for styling elements. Also note that even with the fragments unwrapped they must not contain an array of elements or it will trigger an automatic dom node to be inserted |
+| onRef                           | Accepts either a callback function or a `React.MutableRefObject<HtmlElement>`. The callback function will be invoked with the dom reference. If you pass a ref object it will be updated with the dom reference                                                                                                     |
 
 # A More Complex Example
 
 Here is our desired dom tree. This example will show how to create it using logical HOCs. We can have the benefit of a clean dom while still also having the benefits of of compile time type checking.
 
 ```
+
 <div class="page-layout">
     <aside class="side-bar custom-component two-row-layout">
         <div>Woof Woof</div>

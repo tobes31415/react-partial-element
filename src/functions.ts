@@ -30,7 +30,6 @@ export function createFinalElement(
     className,
     disabled,
     allowEventHandlersWhileDisabled,
-    data,
     onRef,
     ...restOfProps
   } = incomingProps;
@@ -51,11 +50,6 @@ export function createFinalElement(
         .filter((propKey) => propKey.startsWith("on"))
         .forEach((propKey) => delete props[propKey]);
     }
-  }
-  if (data) {
-    Object.entries(data).forEach(([key, value]) => {
-      props[`data-${key}`] = value;
-    });
   }
   if (onRef) {
     props.ref = onRef;
