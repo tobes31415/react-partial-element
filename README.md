@@ -2,9 +2,17 @@
 
 Gives your react projects the ability to create composable pieces of dom elements that let you specify properties such as class names and event handlers that merged into a single dom node at run time. Combine this with Atomic Design principles to create an easy to maintain design system for your application.
 
+# Installation
+
+```
+npm install react-partial-element
+```
+
 # Quick Example
 
 ```
+import { PartialElement } from "react-partial-element";
+
 <PartialElement className="foo">
    <PartialElement className="bar">
       <PartialElement className="baz">
@@ -24,6 +32,29 @@ Results in the following dom element being created
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | PartialElement       | All adjacent partial element nodes will be collapsed into a single resulting dom node. A Partial Element collapses into a singular dom element when it encounters any dom nodes, rendering primitives such as strings or numbers, Fragments, arrays of children, or a PartialElementPortal Component. Partial Elements are still considered Adjacent if they are returned from your custom components as long as no other dom nodes get emitted between them. |
 | PartialElementPortal | Entirely optional. It's equivalent to using PartialElement except that it marks the end of the PartialElement chain and forces a dom node to be created at exactly that location. It's situationally useful for when you're working with nested components and want more control over the rendered output for styling reasons.                                                                                                                                |
+
+# Special props
+
+| Property Name                   | effect                                                                                                                                                                                                                                                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| element                         | The name of the dom node that will get created. (default: "`div`")                                                                                                                                                                                                                                                  |
+| disabled                        | The element will get the `disabled` attribute if it is an input or a button, otherwise it will get the `data-disabled` attribute. Additionally any `on***` attributes, with the exception of onRef, will be omitted unless you also specifiy allowEventHandlersWhileDisabled                                        |
+| allowEventHandlersWhileDisabled | The partial element will emit the on\* event handlers even when disabled (default false)                                                                                                                                                                                                                            |
+| unwrapFragments                 | Continues to unwrap the JSX tree even when it encounters a fragment. Note that this can cause issues with other libraries such as emotion for styling elements. Also note that even with the fragments unwrapped they must not contain an array of elements or it will trigger an automatic dom node to be inserted |
+| onRef                           | Accepts either a callback function or a `React.MutableRefObject<HtmlElement>`. The callback function will be invoked with the dom reference. If you pass a ref object it will be updated with the dom reference                                                                                                     |
+
+# How do I get the element reference?
+
+You can get the element reference by passing in a callback handler for onRef which will be invoked when the dom node is created. Alternatively you can pass in a React.MutableRefObject<HtmlElement> which will get updated automatically.
+
+```
+<PartialElement onRef={r => console.log("The new reference is ", r)}>...
+```
+
+```
+const myElement = useRef<HtmlElement>();
+<PartialElement onRef={myElement}>...
+```
 
 # Merge Strategies
 
@@ -49,29 +80,6 @@ Here is a list of which specific strategies are used for which properties
 | default   | replace             |
 
 You can override these behaviours by importing the PartialElementMergeStrategies object, and overriding the key corresponding to the property you wish to change and setting it to the name of a merge strategy as listed in the previous section. This will be a global change for your project as allowing the merge strategy to differ from element to element would create confusing scenarios likely resulting in bugs so make sure that you think about the impacts before overriding the defaults.
-
-# How do I get the element reference?
-
-You can get the element reference by passing in a callback handler for onRef which will be invoked when the dom node is created. Alternatively you can pass in a React.MutableRefObject<HtmlElement> which will get updated automatically.
-
-```
-<PartialElement onRef={r => console.log("The new reference is ", r)}>...
-```
-
-```
-const myElement = useRef<HtmlElement>();
-<PartialElement onRef={myElement}>...
-```
-
-# Special props
-
-| Property Name                   | effect                                                                                                                                                                                                                                                                                                              |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| element                         | The name of the dom node that will get created. (default: "`div`")                                                                                                                                                                                                                                                  |
-| disabled                        | The element will get the `disabled` attribute if it is an input or a button, otherwise it will get the `data-disabled` attribute. Additionally any `on***` attributes, with the exception of onRef, will be omitted unless you also specifiy allowEventHandlersWhileDisabled                                        |
-| allowEventHandlersWhileDisabled | The partial element will emit the on\* event handlers even when disabled (default false)                                                                                                                                                                                                                            |
-| unwrapFragments                 | Continues to unwrap the JSX tree even when it encounters a fragment. Note that this can cause issues with other libraries such as emotion for styling elements. Also note that even with the fragments unwrapped they must not contain an array of elements or it will trigger an automatic dom node to be inserted |
-| onRef                           | Accepts either a callback function or a `React.MutableRefObject<HtmlElement>`. The callback function will be invoked with the dom reference. If you pass a ref object it will be updated with the dom reference                                                                                                     |
 
 # A More Complex Example
 
